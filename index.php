@@ -42,6 +42,32 @@ $tasks = [
     'status' => false, 
     ],
 ];
+
+function count_task_array(array $task_array, $project_title) {
+  $index = 0;
+  $count_array = count($task_array);
+  $index = 0;
+  while ($index < $count_array) {
+    if ($task_array[$index]['title'] == $project_title) {
+      $num++;
+    }
+    $index++;
+  }
+  
+  return $num;
+}
+
+function getProjectCount(array $task_list, $name_project) {
+    $count = 0;
+    foreach ($task_list as $task) {
+      if (isset($task['project']) && $task['project'] === $name_project) {
+        $count++;
+      }
+    }
+
+    return $count;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -86,7 +112,7 @@ $tasks = [
                         <?php foreach($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $project; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?= getProjectCount($tasks, $project); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
